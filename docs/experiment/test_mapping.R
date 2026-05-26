@@ -87,7 +87,13 @@ get_paris_map <- leaflet() |>
 get_paris_map
 
 # Lyon : lon=4.83, lat=45.76
-map <- leaflet(data = df_velib_info) |>
+map <- leaflet(
+  data = df_velib_info,
+  options = leafletOptions(
+    minZoom = 13,
+    maxZoom = 17
+  )
+) |>
   # addTiles() |>
   addProviderTiles("CartoDB.DarkMatter") |>
   setView(lng = 4.85, lat = 45.76, zoom = 14) |>
@@ -107,10 +113,10 @@ map <- leaflet(data = df_velib_info) |>
     colorPalette = c("green", "orange", "red"),
     width = 30
   )
-  
+map
+
 library(htmlwidgets)
 saveWidget(map, "docs/index.html", selfcontained = TRUE)
-map
 
 # Save a jpeg image of the map
 # install.packages("mapview")
