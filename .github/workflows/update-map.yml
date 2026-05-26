@@ -17,7 +17,11 @@ jobs:
 
       - name: Install R packages
         run: |
-          Rscript -e "install.packages(c('jsonlite', 'leaflet', 'leaflet.minicharts', 'htmlwidgets'), repos='https://cloud.r-project.org')"
+          pak::pkg_install(
+            c("jsonlite", "leaflet", "leaflet.minicharts", "htmlwidgets"),
+            ask = FALSE
+          )
+        shell: Rscript {0}
 
       - name: Generate map
         run: Rscript update_index.R
