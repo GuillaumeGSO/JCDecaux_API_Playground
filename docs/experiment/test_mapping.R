@@ -116,7 +116,7 @@ map <- leaflet(
 map
 
 library(htmlwidgets)
-saveWidget(map, "docs/index.html", selfcontained = TRUE)
+saveWidget(map, "docs/index.html", selfcontained = FALSE)
 
 # Save a jpeg image of the map
 # install.packages("mapview")
