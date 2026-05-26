@@ -59,9 +59,9 @@ all_infos$available_bikes[[1]]
 all_infos$last_update[[1]]
 
 df_velib_info <- data.frame(
-  all_infos$name,
-  all_infos$position["lng"],
-  all_infos$position["lat"],
+  name = all_infos$name,
+  lng = all_infos$position["lng"],
+  lat = all_infos$position["lat"],
   pct_libre,
   pct_occ,
   pct_ko,
@@ -111,7 +111,9 @@ map <- leaflet(
     type = "pie",
     chartdata = df_velib_info[, c("pct_libre", "pct_occ", "pct_ko")],
     colorPalette = c("green", "orange", "red"),
-    width = 30
+    width = 40,
+    opacity = 0.6,
+    transitionTime = 50
   )
 map
 
