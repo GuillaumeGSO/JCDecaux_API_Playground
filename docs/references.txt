@@ -1,0 +1,16 @@
+Note : Paris no longer uses jcdecaux
+
+See all available cities
+https://api.jcdecaux.com/vls/v1/contracts?apiKey=<YOUR_API_KEY>
+
+All stations
+https://api.jcdecaux.com/vls/v1/stations?apiKey=<YOUR_API_KEY>
+
+All stations from one City
+https://api.jcdecaux.com/vls/v1/stations?contract=Lyon&apiKey=<YOUR_API_KEY>
+
+State of one station
+https://api.jcdecaux.com/vls/v1/stations/32001?contract=Lyon&apiKey=<YOUR_API_KEY>
+
+Leaflet provider demo
+https://leaflet-extras.github.io/leaflet-providers/preview/
