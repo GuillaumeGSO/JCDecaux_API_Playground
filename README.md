@@ -8,6 +8,21 @@ Each station is drawn as a circle sized by its dominant occupancy percentage and
 - **Orange** — docks available
 - **Red** — station out of service
 
+## Live map
+
+[**View the live Lyon map →**](https://guillaumegso.github.io/JCDecaux_API_Playground/)
+
+[<img src="docs/preview.png" alt="Live Velov map" width="600">](https://guillaumegso.github.io/JCDecaux_API_Playground/)
+
+### How it's updated
+
+The live map is rebuilt every hour by a GitHub Actions workflow ([.github/workflows/update-map.yml](.github/workflows/update-map.yml)):
+
+1. **Schedule** — a cron trigger (`0 * * * *`) fires hourly. The workflow can also be run manually from the Actions tab.
+2. **Build** — the runner installs R, pulls the JCDecaux data, and runs [update_index.R](update_index.R) to regenerate `docs/index.html` (a self-contained Leaflet map with pie-chart minicharts per station).
+3. **Commit** — `stefanzweifel/git-auto-commit-action` commits the updated `docs/index.html` back to `main` with `[skip ci]` so the commit doesn't re-trigger the workflow.
+4. **Publish** — GitHub Pages serves the `docs/` folder, so the new map is live within seconds of the commit.
+
 ## Setup
 
 1. Get a free API key from [JCDecaux Developer](https://developer.jcdecaux.com/)
