@@ -1,16 +1,13 @@
 # Velib Map
 
-Polls the JCDecaux API at regular intervals and saves a snapshot map of bike-sharing station availability as a `.jpg` image.
+A utility that polls the JCDecaux API at regular intervals and saves each snapshot of bike-sharing station availability as a `.jpg` map — designed to be stitched into a time-lapse animation.
 
-Each station is drawn as a circle sized by its dominant occupancy percentage and colored by status:
-
-- **Green** — bikes available
-- **Orange** — docks available
-- **Red** — station out of service
+Each circle's size reflects the station's total capacity (number of docks), and its color reflects whether the station is mostly free, mostly occupied, or out of service.
 
 ## Live map
 
 [**View the live Lyon map →**](https://guillaumegso.github.io/JCDecaux_API_Playground/)
+
 
 [<img src="docs/preview.png" alt="Live Velov map" width="600">](https://guillaumegso.github.io/JCDecaux_API_Playground/)
 
@@ -35,13 +32,7 @@ JCDECAUX_API_KEY=your_key_here
 3. Install dependencies in R:
 
 ```r
-install.packages(c("jsonlite", "leaflet", "mapview"))
-```
-
-4. Create the output folder for your city (e.g. Lyon):
-
-```
-mkdir -p images/Lyon
+install.packages(c("jsonlite", "leaflet", "leaflet.minicharts", "htmlwidgets", "mapview"))
 ```
 
 ## Usage
@@ -50,7 +41,7 @@ mkdir -p images/Lyon
 source("main.R")
 ```
 
-The script polls every 60 seconds and saves a new map to `images/<city>/` whenever the API reports a new update.
+The script polls every 10 minutes and saves a JPEG to `images/<city>/` on each poll (the output folder is created automatically).
 
 To target a different city, edit the `city` variable in [main.R](main.R). Available cities can be listed via:
 
@@ -64,6 +55,8 @@ https://api.jcdecaux.com/vls/v1/contracts?apiKey=<YOUR_API_KEY>
 
 | File | Description |
 |------|-------------|
-| `main.R` | Entry point — polling loop |
+| `main.R` | Entry point — polling loop for local JPEG snapshots |
 | `velib.R` | Fetches and parses station data from the API |
-| `maps.R` | Renders and saves the leaflet map as an image |
+| `maps.R` | Renders and saves the leaflet map as a JPEG |
+| `update_index.R` | Builds `docs/index.html` (the live web map) |
+| `.github/workflows/update-map.yml` | Hourly Actions workflow that rebuilds and publishes the web map |

@@ -26,7 +26,7 @@ map <- leaflet(
       c("Free", "Occupied", "Out of order")
     ),
     colorPalette = c("green", "orange", "red"),
-    width = 40,
+    width = sqrt(velib_data$n_total) * 8,
     opacity = 0.6,
     popup = popupArgs(
       html = mapply(

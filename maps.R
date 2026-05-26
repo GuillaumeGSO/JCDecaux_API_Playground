@@ -16,7 +16,7 @@ make_map <- function(city, velib_data, last_update) {
     leaflet::addCircleMarkers(
       lng = ~lng,
       lat = ~lat,
-      radius = ~ sqrt(pct_max) * 2,
+      radius = ~ sqrt(n_total) * 2,
       color = ~color,
       fillOpacity = 0.5
     )
