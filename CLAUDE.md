@@ -13,10 +13,10 @@ The live map is Lyon's Vélov' network. Paris no longer uses JCDecaux.
 
 | File | Role |
 |------|------|
-| `velib.R` | Fetches and parses station data from the API. Single function `get_velib_data(city)` returns a data frame; `get_last_update()` extracts a formatted timestamp. |
+| `velib.R` | Fetches and parses station data from the API. Single function `get_velib_data(city)` returns a data frame; `get_last_update()` extracts a formatted timestamp (Europe/Paris) from `max(last_update)`. |
 | `update_index.R` | Generates `docs/index.html`. Run this to rebuild the web map. |
-| `main.R` | Polling loop (60 s) for local JPEG snapshot generation. Calls `make_map()` only when the API reports a new timestamp. |
-| `maps.R` | `make_map()` — renders circle-marker map and saves as JPEG via `mapview::mapshot()`. |
+| `main.R` | Polling loop (10 min) for local JPEG snapshot generation. Snaps on every poll; no change-detection logic. |
+| `maps.R` | `make_map()` — renders circle-marker map (auto-framed with a quantile-trimmed bbox to ignore outlier stations) and saves as JPEG via `mapview::mapshot()`. Creates `images/<city>/` if missing. |
 | `docs/index.html` | Built artifact — do not edit by hand. |
 | `docs/experiment/` | Scratch scripts used during development. Not part of the pipeline. |
 
