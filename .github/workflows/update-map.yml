@@ -17,6 +17,7 @@ jobs:
 
       - name: Install R packages
         run: |
+          install.packages("pak", repos = "https://r-lib.github.io/p/pak/stable/")
           pak::pkg_install(
             c("jsonlite", "leaflet", "leaflet.minicharts", "htmlwidgets"),
             ask = FALSE
