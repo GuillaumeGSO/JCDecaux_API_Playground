@@ -89,10 +89,10 @@ get_paris_map
 # Lyon : lon=4.83, lat=45.76
 map <- leaflet(
   data = df_velib_info,
-  options = leafletOptions(
-    minZoom = 13,
-    maxZoom = 17
-  )
+  # options = leafletOptions(
+  #   minZoom = 13,
+  #   maxZoom = 17
+  # )
 ) |>
   # addTiles() |>
   addProviderTiles("CartoDB.DarkMatter") |>
