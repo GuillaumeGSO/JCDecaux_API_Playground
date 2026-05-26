@@ -17,7 +17,7 @@ get_velib_data <- function(city) {
   places <- all_infos$bike_stands
   pct_free <- (place_free / places * 100)
   pct_occ <- (place_occ / places * 100)
-  pct_ko <- ((places - place_free - place_occ) / places * 100)
+  pct_ko <- pmax(0, (places - place_free - place_occ) / places * 100)
 
   pct_max <- pmax(pct_free, pct_occ, pct_ko)
   dominant <- apply(
@@ -38,7 +38,11 @@ get_velib_data <- function(city) {
     dominant,
     color = unname(
       c(pct_free = "green", pct_occ = "orange", pct_ko = "red")[dominant]
-    )
+    ),
+    n_total = places,
+    n_free  = place_free,
+    n_occ   = place_occ,
+    n_ko    = pmax(0L, places - place_free - place_occ)
   )
 }
 
