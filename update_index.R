@@ -37,6 +37,5 @@ map <- leaflet(
     ),
     position = "topleft"
   )
-map
 saveWidget(map, "docs/index.html", selfcontained = FALSE)
 message(sprintf("Map saved at %s", last_update))
