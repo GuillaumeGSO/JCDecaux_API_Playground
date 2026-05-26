@@ -107,8 +107,9 @@ map <- leaflet(data = df_velib_info) |>
     colorPalette = c("green", "orange", "red"),
     width = 30
   )
-
-
+  
+library(htmlwidgets)
+saveWidget(map, "docs/index.html", selfcontained = TRUE)
 map
 
 # Save a jpeg image of the map
