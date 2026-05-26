@@ -2,23 +2,16 @@ source("velib.R")
 source("maps.R")
 
 city <- "Lyon"
-poll_interval <- 60
-first_run <- TRUE
+poll_interval <- 600
 
 while (TRUE) {
   tryCatch({
     velib_data <- get_velib_data(city)
-    new_update <- get_last_update(velib_data)
-    if (first_run || new_update != last_update) {
-      make_map(city, velib_data, new_update)
-      last_update <- new_update
-      first_run <- FALSE
-      message(sprintf("Map updated at %s", last_update))
-    } else {
-      message(sprintf("No update, last update was at %s", last_update))
-    }
+    last_update <- get_last_update(velib_data)
+    make_map(city, velib_data, last_update)
+    message(format(Sys.time(), "[%H:%M:%S]"), " Map saved for ", last_update)
   }, error = function(e) {
-    message(sprintf("Error: %s", e$message))
+    message(format(Sys.time(), "[%H:%M:%S]"), " Error: ", conditionMessage(e))
   })
   Sys.sleep(poll_interval)
 }
